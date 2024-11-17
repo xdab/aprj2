@@ -39,7 +39,7 @@ public class AprsIsPlugin implements Plugin {
 
         asynchronousDevice = new AsynchronousDeviceWrapper(aprsIsDevice);
         asynchronousDevice.setPacketCallback(this::onPacketReceived);
-        asynchronousDevice.setCloseCallback(this::onDeviceClosed);
+        asynchronousDevice.setCloseCallback(this::stop);
         asynchronousDevice.open();
 
         TxItem txItem;
@@ -52,6 +52,17 @@ public class AprsIsPlugin implements Plugin {
             }
         }
         log.debug("Finishing");
+    }
+
+    @Override
+    public void stop() {
+        txSubscription.cancel();
+        if (asynchronousDevice != null) {
+            asynchronousDevice.close();
+        }
+        if (aprsIsDevice != null) {
+            aprsIsDevice.close();
+        }
     }
 
     @Override
@@ -82,9 +93,5 @@ public class AprsIsPlugin implements Plugin {
         log.debug("RXIS {}", packetString);
         RxItem rxItem = new RxItem(aprsIsDevice.name(), packet);
         rxTopic.publish(rxItem);
-    }
-
-    private void onDeviceClosed() {
-        txSubscription.cancel();
     }
 }

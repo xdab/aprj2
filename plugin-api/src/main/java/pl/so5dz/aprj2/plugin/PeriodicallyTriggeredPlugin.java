@@ -32,4 +32,9 @@ public abstract class PeriodicallyTriggeredPlugin implements Plugin {
         log.debug("Finishing");
     }
 
+    @Override
+    public final void stop() {
+        log.debug("Stopping");
+        Thread.currentThread().interrupt();
+    }
 }

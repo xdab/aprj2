@@ -25,7 +25,7 @@ public abstract class PacketTxInterceptorPlugin extends InterceptorPlugin {
     protected abstract void onPacketToTransmit(String targetDeviceName, Packet packet);
 
     @Override
-    public void run() {
+    public final void run() {
         log.debug("Starting");
         TxItem txItem;
         while ((txItem = txSubscription.awaitMessage()) != null) {
@@ -34,6 +34,12 @@ public abstract class PacketTxInterceptorPlugin extends InterceptorPlugin {
             }
         }
         log.debug("Finishing");
+    }
+
+    @Override
+    public final void stop() {
+        log.debug("Stopping");
+        txSubscription.cancel();
     }
 
 }

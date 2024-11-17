@@ -25,7 +25,7 @@ public abstract class PacketRxInterceptorPlugin extends InterceptorPlugin {
     protected abstract void onPacketReceived(String sourceDeviceName, Packet packet);
 
     @Override
-    public void run() {
+    public final void run() {
         log.debug("Starting");
         RxItem rxItem;
         while ((rxItem = rxSubscription.awaitMessage()) != null) {
@@ -34,6 +34,12 @@ public abstract class PacketRxInterceptorPlugin extends InterceptorPlugin {
             }
         }
         log.debug("Finishing");
+    }
+
+    @Override
+    public final void stop() {
+        log.debug("Stopping");
+        rxSubscription.cancel();
     }
 
 }

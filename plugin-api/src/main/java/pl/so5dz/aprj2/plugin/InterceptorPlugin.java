@@ -26,7 +26,7 @@ public abstract class InterceptorPlugin implements Plugin {
      * @param deviceName name of the device
      * @return {@code true} if the device is intercepted, {@code false} otherwise
      */
-    protected boolean isIntercepted(String deviceName) {
+    protected final boolean isIntercepted(String deviceName) {
         return interceptedDeviceNames() == null || interceptedDeviceNames().contains(deviceName);
     }
 

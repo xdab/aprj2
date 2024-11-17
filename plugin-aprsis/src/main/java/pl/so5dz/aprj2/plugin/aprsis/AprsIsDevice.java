@@ -64,6 +64,7 @@ public class AprsIsDevice implements SynchronousDevice {
         try {
             packetInputStream.close();
             packetOutputStream.close();
+            rawOutputStream.close();
         } catch (Exception e) {
             log.error("Error while closing connection", e);
         }

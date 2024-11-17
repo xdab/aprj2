@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface Plugin extends Runnable {
-    default void stop() {
-    }
+
+    void stop();
 
     String id();
 
