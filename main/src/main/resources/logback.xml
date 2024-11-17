@@ -1,11 +1,11 @@
 <configuration>
-  <appender name="COLOR_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %highlight(%5level) %magenta(%thread) %yellow(%class{0}) %highlight(%msg) %n</pattern>
+      <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %5level %thread %class{0} %msg %n</pattern>
     </encoder>
   </appender>
   <logger name="org.springframework" level="INFO" />
   <root level="debug">
-    <appender-ref ref="COLOR_CONSOLE" />
+    <appender-ref ref="CONSOLE" />
   </root>
 </configuration>
