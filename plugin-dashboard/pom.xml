@@ -68,7 +68,7 @@
             <configuration>
               <workingDirectory>${frontend-dir}</workingDirectory>
               <installDirectory>${project.build.directory}</installDirectory>
-              <nodeVersion>18.19.0</nodeVersion>
+              <nodeVersion>v18.19.0</nodeVersion>
             </configuration>
             <executions>
               <execution>
