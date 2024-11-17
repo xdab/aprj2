@@ -1,0 +1,10 @@
+<configuration>
+  <appender name="COLOR_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %highlight(%5level) %magenta(%thread) %yellow(%class{0}) %highlight(%msg) %n</pattern>
+    </encoder>
+  </appender>
+  <root level="debug">
+    <appender-ref ref="COLOR_CONSOLE" />
+  </root>
+</configuration>

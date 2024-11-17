@@ -1,0 +1,76 @@
+<config>
+    <plugin>
+        <id>aprj2-beacon-plugin</id>
+        <params>
+            <!-- beacon can be repeated -->
+            <beacon>
+                <target>device</target>
+                <packet><![CDATA[N0CALL>APRJ2:!5212.34N/02056.78E#Example digipeater]]></packet>
+                <interval>PT30M</interval>
+                <aprsis>true</aprsis>
+            </beacon>
+        </params>
+    </plugin>
+
+    <plugin>
+        <id>aprj2-aprsis-plugin</id>
+        <params>
+            <server>rotate.aprs2.net</server>
+            <port>14580</port>
+            <login>N0CALL</login>
+            <passcode>-1</passcode>
+            <filter>m/10</filter>
+        </params>
+    </plugin>
+
+    <plugin>
+        <id>aprj2-igate-plugin</id>
+        <params>
+            <callsign>N0CALL</callsign>
+        </params>
+    </plugin>
+
+    <plugin>
+        <id>aprj2-digipeater-plugin</id>
+        <params>
+            <!-- digipeater can be repeated -->
+            <digipeater>
+                <callsign>N0CALL</callsign>
+                <target>deviceId</target>
+                <!-- source can be repeated -->
+                <source>deviceId</source>
+                <aliases>
+                    <traced>WIDE1</traced>
+                    <traced>WIDE2</traced>
+                    <untraced>AB1</untraced>
+                    <untraced>AB2</untraced>
+                </aliases>
+            </digipeater>
+        </params>
+    </plugin>
+
+    <plugin>
+        <id>aprj2-dx-plugin</id>
+        <params>
+            <latitude>52.12345</latitude>
+            <longitude>20.54321</longitude>
+            <dxDistance>90</dxDistance>
+            <source>deviceId</source>
+            <target>deviceId</target>
+            <callsign>N0CALL</callsign>
+            <aprsis>true</aprsis>
+        </params>
+    </plugin>
+
+    <!-- device can be repeated -->
+    <device>
+        <name>deviceId</name>
+        <protocol>kiss</protocol>
+        <tcp>
+            <host>127.0.0.1</host>
+            <port>8200</port>
+        </tcp>
+        <tx>true</tx>
+        <rx>true</rx>
+    </device>
+</config>
