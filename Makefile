@@ -4,7 +4,7 @@ MAIN_CLASS = pl.so5dz.aprj2.App
 
 MAVEN = mvn
 MAVEN_OPTS = -T4
-MAVEN_OPTS_BUILD = 
+MAVEN_OPTS_BUILD = -Pbuild
 MAVEN_OPTS_REBUILD = -DskipTests
 
 clean:

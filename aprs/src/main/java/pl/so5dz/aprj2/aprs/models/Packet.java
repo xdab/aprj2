@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
+import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
 /**
  * Represents a single AX.25 packet.
@@ -61,6 +62,16 @@ public class Packet {
      * The information field of the packet, which contains the actual data.
      */
     private String info;
+
+    /**
+     * Returns the string representation of the packet in TNC2 format.
+     * 
+     * @return the TNC2 representation of the packet
+     */
+    @Override
+    public String toString() {
+        return Tnc2Representation.getInstance().toRepresentation(this);
+    }
 
     /**
      * Returns a simple hash code of the packet.
