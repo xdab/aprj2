@@ -52,9 +52,13 @@ public class PluginManager {
     }
 
     public void stop() {
+        if (plugins == null) {
+            return;
+        }
         if (pluginThreads == null) {
             return;
         }
+        plugins.forEach(Plugin::stop);
         pluginThreads.forEach(Thread::interrupt);
         pluginThreads = null;
         if (stopCallback != null) {

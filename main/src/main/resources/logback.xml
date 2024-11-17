@@ -4,6 +4,7 @@
       <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %highlight(%5level) %magenta(%thread) %yellow(%class{0}) %highlight(%msg) %n</pattern>
     </encoder>
   </appender>
+  <logger name="org.springframework" level="INFO" />
   <root level="debug">
     <appender-ref ref="COLOR_CONSOLE" />
   </root>
