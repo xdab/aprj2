@@ -4,9 +4,8 @@ MAIN_CLASS = pl.so5dz.aprj2.App
 
 MAVEN = mvn
 MAVEN_OPTS = -T4
-MAVEN_OPTS_BUILD = -Pbuild
-MAVEN_OPTS_REBUILD = -Pbuild -DskipTests
-MAVEN_PLUGIN_MODULES = plugin-igate
+MAVEN_OPTS_BUILD = 
+MAVEN_OPTS_REBUILD = -DskipTests
 
 clean:
 	$(MAVEN) clean
@@ -16,9 +15,6 @@ test:
 
 build:
 	$(MAVEN) clean package $(MAVEN_OPTS) $(MAVEN_OPTS_BUILD)
-
-rebuild_plugins:
-	$(MAVEN) package -pl $(MAVEN_PLUGIN_MODULES) -am $(MAVEN_OPTS) $(MAVEN_OPTS_BUILD) $(MAVEN_OPTS_REBUILD)
 
 rebuild:
 	$(MAVEN) package $(MAVEN_OPTS) $(MAVEN_OPTS_BUILD) $(MAVEN_OPTS_REBUILD)
