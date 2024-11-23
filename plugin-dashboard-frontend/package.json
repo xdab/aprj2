@@ -6,13 +6,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/material": "^6.1.8",
     "@reduxjs/toolkit": "^2.2.0",
     "@stomp/stompjs": "^7.0.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
-    "sockjs-client": "^1.6.1"
+    "sockjs-client": "^1.6.1",
+    "supports-color": "^8.1.1"
   },
   "devDependencies": {
     "@types/node": "20.2.5",

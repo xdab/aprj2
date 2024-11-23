@@ -1,10 +1,5 @@
-import type { Metadata } from "next";
-import { Packets } from "./components/packets/Packets";
+import { Packets } from "./packets/components/Packets";
 
-export default function IndexPage() {
+export default function DefaultPage() {
   return <Packets />;
 }
-
-export const metadata: Metadata = {
-  title: "Redux Toolkit",
-};

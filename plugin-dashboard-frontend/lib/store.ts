@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import packetsSlice from "./features/packets/packetsSlice";
+import connectionSlice from "./store/connectionSlice";
+import packetsSlice from "./store/packetsSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       packets: packetsSlice,
+      connection: connectionSlice,
     },
   });
 };

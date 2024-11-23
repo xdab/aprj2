@@ -1,6 +1,7 @@
 "use client"
 
-import { addPacket, Packet } from '@/lib/features/packets/packetsSlice';
+import { setWsConnected } from '@/lib/store/connectionSlice';
+import { addPacket, Packet } from '@/lib/store/packetsSlice';
 import { Client } from '@stomp/stompjs';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -21,6 +22,7 @@ const WebSocketProvider: React.FC = () => {
       webSocketFactory: () => socket,
       onConnect: () => {
         console.log('Connected');
+        dispatch(setWsConnected(true));
         client.subscribe('/topic/packets', (message) => {
           const packet: Packet = JSON.parse(message.body);
           console.log(packet);
@@ -31,6 +33,10 @@ const WebSocketProvider: React.FC = () => {
         console.error('Broker reported error: ' + frame.headers['message']);
         console.error('Additional details: ' + frame.body);
       },
+      onDisconnect: () => {
+        console.log('Disconnected');
+        dispatch(setWsConnected(false));
+      }
     });
 
     client.activate();

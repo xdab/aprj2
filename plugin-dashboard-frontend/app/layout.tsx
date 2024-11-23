@@ -1,35 +1,47 @@
-import type { ReactNode } from "react";
-import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
+"use client"
 
+import { CssBaseline } from '@mui/material';
+import type { ReactNode } from "react";
 import WebSocketProvider from "./PacketStreamProvider";
+import { StoreProvider } from "./StoreProvider";
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import { Nav } from './components/Nav';
 import "./styles/globals.css";
-import styles from "./styles/layout.module.css";
 
 interface Props {
   readonly children: ReactNode;
 }
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#CFD8DC',
+    },
+    secondary: {
+      main: '#FFC107',
+    },
+  },
+});
+
 export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
       <WebSocketProvider />
-
+      <CssBaseline />
       <html lang="en">
         <body>
-          <section className={styles.container}>
+          <ThemeProvider theme={theme}>
             <Nav />
-
-            <header className={styles.header}>
-              aprj2 dashboard
-            </header>
-
-            <main className={styles.main}>{children}</main>
-
-            <footer className={styles.footer}>
-              SO5DZ 2024
-            </footer>
-          </section>
+            <div style={{ padding: '16px' }}>
+              {children}
+            </div>
+          </ThemeProvider>
         </body>
       </html>
     </StoreProvider>
