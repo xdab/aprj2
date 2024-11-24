@@ -1,6 +1,6 @@
 JAVA = java
 CLASSPATH = "target/*"
-MAIN_CLASS = pl.so5dz.aprj2.App
+MAIN_CLASS = pl.so5dz.aprj2.Main
 
 MAVEN = mvn
 MAVEN_OPTS = -T4
