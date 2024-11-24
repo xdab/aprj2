@@ -3,13 +3,12 @@
 import { setWsConnected } from '@/lib/store/connectionSlice';
 import { addPacket, Packet } from '@/lib/store/packetsSlice';
 import { Client } from '@stomp/stompjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import SockJS from 'sockjs-client';
 
 const WebSocketProvider: React.FC = () => {
   const dispatch = useDispatch();
-  const [reconnectAttempts, setReconnectAttempts] = useState(0);
 
   useEffect(() => {
     const protocol = window.location.protocol;
@@ -18,13 +17,11 @@ const WebSocketProvider: React.FC = () => {
 
     console.log('Connecting to ' + wsUrl);
 
-    const socket = new SockJS(wsUrl);
     const client = new Client({
-      webSocketFactory: () => socket,
+      webSocketFactory: () => new SockJS(wsUrl),
       onConnect: () => {
         console.log('Connected');
         dispatch(setWsConnected(true));
-        setReconnectAttempts(0); // Reset reconnect attempts on successful connection
         client.subscribe('/topic/packets', (message) => {
           const packet: Packet = JSON.parse(message.body);
           console.log(packet);
@@ -42,14 +39,9 @@ const WebSocketProvider: React.FC = () => {
       onWebSocketClose: () => {
         console.log('WebSocket closed');
         dispatch(setWsConnected(false));
-        setTimeout(() => {
-          console.log(`Reconnect attempt ${reconnectAttempts + 1}`);
-          setReconnectAttempts(reconnectAttempts + 1);
-          client.activate();
-        }, 5000);
       },
+      reconnectDelay: 2500,
       connectionTimeout: 2500,
-      heartbeatOutgoing: 2500,
     });
 
     client.activate();
@@ -57,7 +49,7 @@ const WebSocketProvider: React.FC = () => {
     return () => {
       client.deactivate();
     };
-  }, [dispatch, reconnectAttempts]);
+  }, [dispatch]);
 
   return null;
 };
