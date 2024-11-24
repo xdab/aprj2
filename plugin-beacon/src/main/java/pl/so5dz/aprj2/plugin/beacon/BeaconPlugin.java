@@ -37,7 +37,9 @@ public class BeaconPlugin extends PeriodicallyTriggeredPlugin {
 
     @Override
     protected void onTrigger() {
-        beacons.forEach(Beacon::trigger);
+        if (beacons != null) {
+            beacons.forEach(Beacon::trigger);
+        }
     }
 
     @Override
@@ -69,5 +71,4 @@ public class BeaconPlugin extends PeriodicallyTriggeredPlugin {
         return new Beacon(beaconConfig.getTarget(), packet,
                 beaconConfig.getInterval(), beaconConfig.isAprsis());
     }
-
 }

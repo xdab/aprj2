@@ -60,13 +60,21 @@ public class AprsIsDevice implements SynchronousDevice {
 
     @Override
     public void close() {
-        connection.close();
+        if (connection != null) {
+            connection.close();
+        }
         try {
-            packetInputStream.close();
-            packetOutputStream.close();
-            rawOutputStream.close();
+            if (packetInputStream != null) {
+                packetInputStream.close();
+            }
+            if (packetOutputStream != null) {
+                packetOutputStream.close();
+            }
+            if (rawOutputStream != null) {
+                rawOutputStream.close();
+            }
         } catch (Exception e) {
-            log.error("Error while closing connection", e);
+            log.error("Error while closing APRS-IS device", e);
         }
     }
 
