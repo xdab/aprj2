@@ -11,6 +11,6 @@ public class TaskConfig {
 
     @Bean
     public ExecutorService taskExecutor() {
-        return Executors.newSingleThreadExecutor();
+        return Executors.newFixedThreadPool(2);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PacketController {
+public class PacketWsController {
 
     @MessageMapping("/packets")
     @SendTo("/topic/packets")
@@ -18,5 +18,4 @@ public class PacketController {
     @SubscribeMapping("/packets")
     public void subscribePacketMessage() {
     }
-
 }

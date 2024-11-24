@@ -15,9 +15,11 @@ import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import pl.so5dz.aprj2.aprs.models.Callsign;
 import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 import pl.so5dz.aprj2.plugin.dashboard.common.CallsignDto;
 import pl.so5dz.aprj2.pubsub.api.PubSub;
 import pl.so5dz.aprj2.pubsub.api.Subscription;
+import pl.so5dz.aprj2.pubsub.api.Topic;
 import pl.so5dz.aprj2.pubsub.impl.Topics;
 import pl.so5dz.aprj2.pubsub.impl.items.RxItem;
 import pl.so5dz.aprj2.pubsub.impl.items.TxItem;
@@ -27,6 +29,7 @@ import pl.so5dz.aprj2.pubsub.impl.items.TxItem;
 public class PacketService {
     private final Subscription<RxItem> rxSubscription = PubSub.topic(Topics.RX, RxItem.class).subscribe();
     private final Subscription<TxItem> txSubscription = PubSub.topic(Topics.TX, TxItem.class).subscribe();
+    private final Topic<TxItem> txTopic = PubSub.topic(Topics.TX, TxItem.class);
 
     private final SimpMessagingTemplate messagingTemplate;
     private final ExecutorService taskExecutor;
@@ -98,5 +101,11 @@ public class PacketService {
                 .ssid(callsign.getSsid())
                 .repeated(callsign.isRepeated())
                 .build();
+    }
+
+    public void sendPacket(RawPacketDto rawPacket) {
+        Packet packet = Tnc2Representation.getInstance().toPacket(rawPacket.getRaw());
+        TxItem txItem = new TxItem(rawPacket.getDevice(), packet);
+        txTopic.publish(txItem);
     }
 }

@@ -8,9 +8,14 @@ export interface Callsign {
   repeated: boolean;
 }
 
+export enum PacketDirection {
+  RX = 'RX',
+  TX = 'TX',
+}
+
 export interface Packet {
   timestamp: string;
-  direction: string;
+  direction: PacketDirection;
   device: string;
   source: Callsign;
   destination: Callsign;
