@@ -24,6 +24,7 @@ run:
 
 install: 
 	groupadd -f aprj2
+	rm -rf /usr/local/bin/aprj2
 	install -d -o root -g aprj2 /usr/local/bin/aprj2
 	install -m 664 -o root -g aprj2 target/*.jar /usr/local/bin/aprj2
 	cp -n system/config.example.xml /etc/aprj2.xml
