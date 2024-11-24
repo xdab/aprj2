@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const green = '#00FF00';
 const red = '#FF0000';
 
-const ConnectionStatus = () => {
+const ConnectionIndicator = () => {
   const isWsConnected = useSelector((state: RootState) => state.connection.isWsConnected);
 
   return (
@@ -15,8 +15,9 @@ const ConnectionStatus = () => {
       bgcolor={isWsConnected ? green : red}
       borderRadius="50%"
       marginRight={1}
+      border="1px solid black"
     />
   );
 };
 
-export default ConnectionStatus;
+export default ConnectionIndicator;

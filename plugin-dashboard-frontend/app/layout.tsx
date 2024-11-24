@@ -2,7 +2,6 @@
 
 import { CssBaseline } from '@mui/material';
 import type { ReactNode } from "react";
-import WebSocketProvider from "./PacketStreamProvider";
 import { StoreProvider } from "./StoreProvider";
 
 import '@fontsource/roboto/300.css';
@@ -17,6 +16,7 @@ interface Props {
 }
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import WebSocketProvider from './WebSocketProvider';
 
 const theme = createTheme({
   palette: {

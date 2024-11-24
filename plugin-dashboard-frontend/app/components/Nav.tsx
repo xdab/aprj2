@@ -2,7 +2,7 @@
 
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import Link from "next/link";
-import ConnectionStatus from './ConnectionStatus';
+import ConnectionIndicator from './Connection';
 
 export const Nav = () => {
   return (
@@ -12,7 +12,7 @@ export const Nav = () => {
           aprj2 dashboard
         </Typography>
         <Box sx={{ mx: 2 }}>
-          <ConnectionStatus />
+          <ConnectionIndicator />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
         <Button color="inherit" component={Link} href="/packets" sx={{ textTransform: 'none' }}>
