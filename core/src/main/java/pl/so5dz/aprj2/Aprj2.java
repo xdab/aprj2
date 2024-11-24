@@ -34,8 +34,8 @@ import pl.so5dz.aprj2.pubsub.impl.items.TxItem;
 
 @Slf4j
 public class Aprj2 implements Runnable {
-    private final DeviceManager deviceManager;
-    private final PluginManager pluginManager;
+    private static final Aprj2Context context = Aprj2Context.getInstance();
+
     private final Topic<RxItem> rxTopic;
     private final Topic<TxItem> txTopic;
     private final Subscription<TxItem> txSubscription;
@@ -45,21 +45,25 @@ public class Aprj2 implements Runnable {
     private boolean running;
 
     public Aprj2(Aprj2Config config) {
-        deviceManager = new DeviceManager(config.getDevices().stream()
+        DeviceManager deviceManager = new DeviceManager(config.getDevices().stream()
                 .map(Aprj2::createDevice)
                 .toList());
         deviceManager.setPacketCallback(this::onPacketReceived);
         deviceManager.setCloseCallback(this::onDeviceClosed);
+        context.setDeviceManager(deviceManager);
+
+        PluginManager pluginManager = new PluginManager(config.getPlugins());
+        pluginManager.setDeviceInfo(config.getDevices().stream()
+                .map(Aprj2::createDeviceInfo)
+                .toList());
+        pluginManager.setStopCallback(this::onPluginsStop);
+        context.setPluginManager(pluginManager);
+
         rxTopic = PubSub.topic(Topics.RX, RxItem.class);
         txTopic = PubSub.topic(Topics.TX, TxItem.class);
         txSubscription = txTopic.subscribe();
         rxDeduplicators = new HashMap<>(config.getDevices().size());
         txDeduplicators = new HashMap<>(config.getDevices().size());
-        pluginManager = new PluginManager(config.getPlugins());
-        pluginManager.setDeviceInfo(config.getDevices().stream()
-                .map(Aprj2::createDeviceInfo)
-                .toList());
-        pluginManager.setStopCallback(this::onPluginsStop);
     }
 
     @Override
@@ -69,9 +73,9 @@ public class Aprj2 implements Runnable {
         }
         log.debug("Running Aprj2");
         running = true;
-        pluginManager.load();
-        pluginManager.start();
-        deviceManager.open();
+        context.getPluginManager().load();
+        context.getPluginManager().start();
+        context.getDeviceManager().open();
         serveTxTopic();
         log.debug("Aprj2 finished");
         stop();
@@ -83,8 +87,8 @@ public class Aprj2 implements Runnable {
         }
         log.debug("Stopping Aprj2");
         running = false;
-        deviceManager.close();
-        pluginManager.stop();
+        context.getDeviceManager().close();
+        context.getPluginManager().stop();
         PubSub.cancelAll();
         log.debug("Aprj2 stopped");
     }
@@ -92,7 +96,7 @@ public class Aprj2 implements Runnable {
     private void serveTxTopic() {
         TxItem txItem;
         while (running && (txItem = txSubscription.awaitMessage()) != null) {
-            AsynchronousDevice targetDevice = deviceManager.getDevice(txItem.targetDeviceName());
+            AsynchronousDevice targetDevice = context.getDeviceManager().getDevice(txItem.targetDeviceName());
             if (targetDevice != null) {
                 onPacketTransmission(targetDevice, txItem.packet());
             }

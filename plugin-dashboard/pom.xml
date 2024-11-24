@@ -34,6 +34,10 @@
 
   <dependencies>
     <dependency>
+      <groupId>pl.so5dz.aprj2</groupId>
+      <artifactId>core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>pl.so5dz.aprj2.plugin</groupId>
       <artifactId>plugin-api</artifactId>
     </dependency>
