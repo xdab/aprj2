@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import configSlice from "./store/configSlice";
 import connectionSlice from "./store/connectionSlice";
 import packetsSlice from "./store/packetsSlice";
 
@@ -7,6 +8,7 @@ export const makeStore = () => {
     reducer: {
       packets: packetsSlice,
       connection: connectionSlice,
+      config: configSlice,
     },
   });
 };

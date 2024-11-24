@@ -1,4 +1,4 @@
-package pl.so5dz.aprj2.plugin.dashboard.spring;
+package pl.so5dz.aprj2.plugin.dashboard.packet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,7 @@ import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import pl.so5dz.aprj2.aprs.models.Callsign;
 import pl.so5dz.aprj2.aprs.models.Packet;
-import pl.so5dz.aprj2.plugin.dashboard.dto.CallsignDto;
-import pl.so5dz.aprj2.plugin.dashboard.dto.PacketDirection;
-import pl.so5dz.aprj2.plugin.dashboard.dto.PacketDto;
+import pl.so5dz.aprj2.plugin.dashboard.common.CallsignDto;
 import pl.so5dz.aprj2.pubsub.api.PubSub;
 import pl.so5dz.aprj2.pubsub.api.Subscription;
 import pl.so5dz.aprj2.pubsub.impl.Topics;

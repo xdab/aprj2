@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Packets } from "./Packets";
+import Config from "./Config";
 
 export default function IndexPage() {
-  return <Packets />;
+  return <Config />;
 }
 
 export const metadata: Metadata = {
-  title: "aprj2 dashboard: Packet view",
+  title: "aprj2 dashboard: Config view",
 };

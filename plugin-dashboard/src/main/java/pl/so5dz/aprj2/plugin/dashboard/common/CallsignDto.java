@@ -1,4 +1,4 @@
-package pl.so5dz.aprj2.plugin.dashboard.dto;
+package pl.so5dz.aprj2.plugin.dashboard.common;
 
 import lombok.Builder;
 import lombok.Value;
