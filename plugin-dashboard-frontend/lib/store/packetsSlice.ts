@@ -1,9 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface Callsign {
+  full: string;
+  simple: string;
+  base: string;
+  ssid: number;
+  repeated: boolean;
+}
+
 export interface Packet {
+  timestamp: string;
   direction: string;
   device: string;
-  rawPacket: string;
+  source: Callsign;
+  destination: Callsign;
+  path: Callsign[];
+  info: string;
 }
 
 export interface PacketState {

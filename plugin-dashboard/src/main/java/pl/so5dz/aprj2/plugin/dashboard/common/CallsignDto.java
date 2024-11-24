@@ -6,7 +6,8 @@ import lombok.Value;
 @Value
 @Builder
 public class CallsignDto {
-    String callsign;
+    String full;
+    String simple;
     String base;
     int ssid;
     boolean repeated;

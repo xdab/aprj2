@@ -1,5 +1,6 @@
 package pl.so5dz.aprj2.plugin.dashboard.packet;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -78,19 +79,21 @@ public class PacketService {
                 .map(this::toCallsignDto)
                 .collect(Collectors.toList());
         return PacketDto.builder()
-                .rawPacket(packet.toString())
+                .timestamp(ZonedDateTime.now())
                 .source(toCallsignDto(packet.getSource()))
                 .destination(toCallsignDto(packet.getDestination()))
+                .info(packet.getInfo())
                 .path(path);
     }
 
     private CallsignDto toCallsignDto(Callsign callsign) {
-        String dispCallsign = callsign.getBase();
+        String simpleCallsign = callsign.getBase();
         if (callsign.getSsid() != 0) {
-            dispCallsign += "-" + callsign.getSsid();
+            simpleCallsign += "-" + callsign.getSsid();
         }
         return CallsignDto.builder()
-                .callsign(dispCallsign)
+                .full(callsign.toString())
+                .simple(simpleCallsign)
                 .base(callsign.getBase())
                 .ssid(callsign.getSsid())
                 .repeated(callsign.isRepeated())

@@ -18,9 +18,6 @@ export const Nav = () => {
         <Button color="inherit" component={Link} href="/packets" sx={{ textTransform: 'none' }}>
           Packets
         </Button>
-        <Button color="inherit" component={Link} href="/verify" sx={{ textTransform: 'none' }}>
-          Verify
-        </Button>
         <Button color="inherit" component={Link} href="/config" sx={{ textTransform: 'none' }}>
           Config
         </Button>
