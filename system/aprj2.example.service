@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=5s
 WorkingDirectory=/usr/local/bin/aprj2
-ExecStart=/usr/bin/java -cp "*" pl.so5dz.aprj2.App /etc/aprj2.xml
+ExecStart=/usr/bin/java -cp "*" pl.so5dz.aprj2.Main /etc/aprj2.xml
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]
