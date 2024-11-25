@@ -15,8 +15,11 @@ export const Nav = () => {
           <ConnectionIndicator />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
-        <Button color="inherit" component={Link} href="/packets" sx={{ textTransform: 'none' }}>
-          Packets
+        <Button color="inherit" component={Link} href="/packetstream" sx={{ textTransform: 'none' }}>
+          Packet stream
+        </Button>
+        <Button color="inherit" component={Link} href="/packetbuilder" sx={{ textTransform: 'none' }}>
+          Packet builder
         </Button>
         <Button color="inherit" component={Link} href="/config" sx={{ textTransform: 'none' }}>
           Config

@@ -23,6 +23,12 @@
       <groupId>pl.so5dz.aprj2</groupId>
       <artifactId>core</artifactId>
     </dependency>
+    <!-- DEV ONLY -->
+    <dependency>
+      <groupId>pl.so5dz.aprj2.plugin</groupId>
+      <artifactId>plugin-dashboard</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <profiles>

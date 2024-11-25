@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PacketWsController {
 
-    @MessageMapping("/packets")
-    @SendTo("/topic/packets")
+    @MessageMapping("/packet")
+    @SendTo("/topic/packet")
     public PacketDto sendPacketMessage(PacketDto message, StompHeaderAccessor headerAccessor) {
         return message;
     }
 
-    @SubscribeMapping("/packets")
+    @SubscribeMapping("/packet")
     public void subscribePacketMessage() {
     }
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Config from "./Config";
+import { PacketStream } from "./PacketStream";
 
 export default function IndexPage() {
-  return <Config />;
+  return <PacketStream />;
 }
 
 export const metadata: Metadata = {
-  title: "aprj2 dash: Configuration",
+  title: "aprj2 dash: Packet stream",
 };

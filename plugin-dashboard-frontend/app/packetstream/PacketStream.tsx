@@ -18,8 +18,11 @@ import {
 import moment from 'moment';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useServices } from '../providers/ServiceProvider';
 
-export const Packets = () => {
+export const PacketStream = () => {
+  const { apiClient } = useServices();
+
   var [rawPacket, setRawPacket] = useState('');
   var [deviceName, setDeviceName] = useState('');
   const packets = useSelector((state: RootState) => state.packets.packets);
@@ -33,14 +36,8 @@ export const Packets = () => {
   }
 
   const handleSendPacket = (event: any) => {
-    const baseUrl = `${window.location.protocol}//${window.location.hostname}:8080`;
-    fetch(`${baseUrl}/api/packets`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ raw: rawPacket, device: deviceName })
-    });
+    const request = { raw: rawPacket, device: deviceName };
+    apiClient.post("/api/packet", request);
   }
 
   return (

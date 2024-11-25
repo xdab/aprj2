@@ -17,6 +17,12 @@ import pl.so5dz.aprj2.aprs.models.Callsign;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 import pl.so5dz.aprj2.plugin.dashboard.common.CallsignDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.ItemDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.MessageDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.ObjectDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.PositionReportDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.RawPacketDto;
+import pl.so5dz.aprj2.plugin.dashboard.packet.outgoing.StatusDto;
 import pl.so5dz.aprj2.pubsub.api.PubSub;
 import pl.so5dz.aprj2.pubsub.api.Subscription;
 import pl.so5dz.aprj2.pubsub.api.Topic;
@@ -107,5 +113,24 @@ public class PacketService {
         Packet packet = Tnc2Representation.getInstance().toPacket(rawPacket.getRaw());
         TxItem txItem = new TxItem(rawPacket.getDevice(), packet);
         txTopic.publish(txItem);
+    }
+
+    public void sendPositionReport(PositionReportDto positionReport) {
+    }
+
+    public void sendStatus(StatusDto status) {
+    }
+
+    public void sendMessage(MessageDto message) {
+    }
+
+    public void sendObject(ObjectDto objectDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sendObject'");
+    }
+
+    public void sendItem(ItemDto itemDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sendItem'");
     }
 }
