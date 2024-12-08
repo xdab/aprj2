@@ -97,16 +97,15 @@ public class Digipeater {
 
         // Prepare new path marking the performed digipeating
         List<Callsign> newPath = new ArrayList<>(packet.getPath());
+        int instructionIndex = newPath.indexOf(repeatingInstruction);
         if (isOwnCallsign(repeatingInstruction)) {
             Callsign updatedInstruction = repeatedOwnCallsign();
-            int aliasIndex = newPath.indexOf(repeatingInstruction);
-            newPath.set(aliasIndex, updatedInstruction);
+            newPath.set(instructionIndex, updatedInstruction);
         } else {
             RepeatingScheme scheme = new RepeatingScheme(repeatingInstruction);
-            int aliasIndex = newPath.indexOf(repeatingInstruction);
-            newPath.set(aliasIndex, scheme.decrement());
+            newPath.set(instructionIndex, scheme.decrement());
             if (isTracedAlias(scheme.getAlias())) {
-                newPath.add(aliasIndex, repeatedOwnCallsign());
+                newPath.add(instructionIndex, repeatedOwnCallsign());
             }
         }
 
