@@ -21,7 +21,6 @@
     <module>plugin-beacon</module>
     <module>plugin-dx</module>
     <module>plugin-aprsis</module>
-    <module>plugin-dashboard</module>
   </modules>
 
   <name>aprj2</name>
