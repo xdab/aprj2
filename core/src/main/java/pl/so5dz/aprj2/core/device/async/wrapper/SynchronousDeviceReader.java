@@ -2,7 +2,7 @@ package pl.so5dz.aprj2.core.device.async.wrapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.core.device.async.PacketCallback;
 import pl.so5dz.aprj2.core.device.sync.SynchronousDevice;
 

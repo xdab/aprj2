@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import pl.so5dz.aprj2.aprs.antlr.PacketLexer;
 import pl.so5dz.aprj2.aprs.antlr.PacketParser;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 public class SimplePacketParser {
     private static ParseTreeWalker parseTreeWalker = ParseTreeWalker.DEFAULT;

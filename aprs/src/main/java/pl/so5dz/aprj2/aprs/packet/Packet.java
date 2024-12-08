@@ -1,8 +1,9 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.packet;
 
 import java.util.List;
 import java.util.Objects;
 
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
 public abstract class Packet {

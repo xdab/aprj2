@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.aprs.parser.wip.SimplePacketParser;
 
 public class SimplePacketParserTest {

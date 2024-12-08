@@ -1,9 +1,10 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.callsign.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 
 /**
  * Callsign of an APRS station.

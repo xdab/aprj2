@@ -1,6 +1,6 @@
 package pl.so5dz.aprj2.aprs.representation;
 
-import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 
 /**
  * Interface for converting callsigns between object and representation model

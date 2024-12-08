@@ -1,6 +1,6 @@
 package pl.so5dz.aprj2.core.device.sync;
 
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.core.device.Device;
 
 /**

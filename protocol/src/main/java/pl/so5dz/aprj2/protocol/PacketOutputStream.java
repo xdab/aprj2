@@ -4,7 +4,7 @@ import java.io.FilterOutputStream;
 import java.io.OutputStream;
 
 import lombok.NonNull;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 public abstract class PacketOutputStream extends FilterOutputStream {
 

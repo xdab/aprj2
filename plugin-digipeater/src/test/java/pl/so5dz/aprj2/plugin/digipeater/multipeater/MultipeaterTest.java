@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import pl.so5dz.aprj2.aprs.models.DefaultPacket;
+import pl.so5dz.aprj2.aprs.packet.impl.DefaultPacket;
 import pl.so5dz.aprj2.plugin.digipeater.Digipeater;
 import pl.so5dz.aprj2.plugin.digipeater.TestConstants;
 

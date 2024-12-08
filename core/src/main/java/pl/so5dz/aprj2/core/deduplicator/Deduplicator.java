@@ -3,7 +3,7 @@ package pl.so5dz.aprj2.core.deduplicator;
 import java.util.HashMap;
 import java.util.Map;
 
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 public class Deduplicator {
     private static final int REMOVE_OLD_ENTRIES_EVERY_PACKETS = 100;

@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import com.google.auto.service.AutoService;
 
 import lombok.extern.slf4j.Slf4j;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
-import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 import pl.so5dz.aprj2.plugin.DeviceInfo;
 import pl.so5dz.aprj2.plugin.PacketRxInterceptorPlugin;

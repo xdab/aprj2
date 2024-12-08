@@ -5,7 +5,7 @@ import static java.util.Objects.nonNull;
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.aprs.parser.models.PacketContent;
 import pl.so5dz.aprj2.aprs.parser.old.position.MicEParser;
 import pl.so5dz.aprj2.aprs.parser.old.position.PositionReportParser;

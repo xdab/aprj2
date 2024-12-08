@@ -1,7 +1,7 @@
 package pl.so5dz.aprj2.plugin.digipeater.multipeater;
 
 import lombok.Value;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 @Value
 public class MultipeatedPacket {

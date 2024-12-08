@@ -1,9 +1,12 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.callsign.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
+import pl.so5dz.aprj2.aprs.callsign.impl.RepeatingScheme;
 
 public class RepeatingSchemeTest {
 

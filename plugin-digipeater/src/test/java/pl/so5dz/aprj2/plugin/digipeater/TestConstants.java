@@ -1,8 +1,8 @@
 package pl.so5dz.aprj2.plugin.digipeater;
 
 import lombok.experimental.UtilityClass;
-import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
+import pl.so5dz.aprj2.aprs.callsign.impl.DefaultCallsign;
 
 @UtilityClass
 public class TestConstants {

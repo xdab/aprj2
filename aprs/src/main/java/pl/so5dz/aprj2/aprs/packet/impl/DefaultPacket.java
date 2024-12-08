@@ -1,10 +1,12 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.packet.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Builder;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 /**
  * Represents a single AX.25 packet.

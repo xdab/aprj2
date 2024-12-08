@@ -3,7 +3,7 @@ package pl.so5dz.aprj2.protocol;
 import java.io.FilterInputStream;
 import java.io.InputStream;
 
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 public abstract class PacketInputStream extends FilterInputStream {
 

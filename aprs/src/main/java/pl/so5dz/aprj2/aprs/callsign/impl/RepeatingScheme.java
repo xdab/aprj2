@@ -1,8 +1,9 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.callsign.impl;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

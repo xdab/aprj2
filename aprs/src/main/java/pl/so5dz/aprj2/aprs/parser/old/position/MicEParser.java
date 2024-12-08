@@ -2,7 +2,7 @@ package pl.so5dz.aprj2.aprs.parser.old.position;
 
 import static java.util.Objects.isNull;
 
-import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.parser.models.PacketContent;
 import pl.so5dz.aprj2.aprs.parser.models.Position;
 import pl.so5dz.aprj2.aprs.parser.models.Symbol;

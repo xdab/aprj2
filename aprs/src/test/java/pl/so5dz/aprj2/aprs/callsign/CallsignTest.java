@@ -1,4 +1,4 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.callsign;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
 
 public class CallsignTest {

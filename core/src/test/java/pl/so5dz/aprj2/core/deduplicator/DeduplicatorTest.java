@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pl.so5dz.aprj2.aprs.models.DefaultPacket;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
+import pl.so5dz.aprj2.aprs.packet.impl.DefaultPacket;
 import pl.so5dz.aprj2.core.TestConstants;
 
 public class DeduplicatorTest {

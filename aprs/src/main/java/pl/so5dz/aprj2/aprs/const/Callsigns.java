@@ -1,8 +1,8 @@
 package pl.so5dz.aprj2.aprs.constants;
 
 import lombok.experimental.UtilityClass;
-import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
+import pl.so5dz.aprj2.aprs.callsign.impl.DefaultCallsign;
 
 /**
  * Common callsigns and callsign-like indicators seen in real-world APRS

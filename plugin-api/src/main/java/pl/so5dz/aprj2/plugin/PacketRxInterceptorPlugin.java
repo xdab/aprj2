@@ -1,7 +1,7 @@
 package pl.so5dz.aprj2.plugin;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.pubsub.api.PubSub;
 import pl.so5dz.aprj2.pubsub.api.Subscription;
 import pl.so5dz.aprj2.pubsub.impl.Topics;

@@ -1,8 +1,9 @@
-package pl.so5dz.aprj2.aprs.models;
+package pl.so5dz.aprj2.aprs.callsign;
 
 import java.util.Objects;
 
 import lombok.NoArgsConstructor;
+import pl.so5dz.aprj2.aprs.callsign.impl.DefaultCallsign;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
 @NoArgsConstructor

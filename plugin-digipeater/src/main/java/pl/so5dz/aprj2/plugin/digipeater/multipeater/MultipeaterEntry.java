@@ -2,7 +2,7 @@ package pl.so5dz.aprj2.plugin.digipeater.multipeater;
 
 import lombok.Getter;
 import lombok.ToString;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.plugin.digipeater.Digipeater;
 
 @Getter

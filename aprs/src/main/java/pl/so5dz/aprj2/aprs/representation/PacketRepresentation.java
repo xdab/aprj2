@@ -1,7 +1,7 @@
 package pl.so5dz.aprj2.aprs.representation;
 
 import lombok.NonNull;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 /**
  * Interface for converting packets between object and representation model

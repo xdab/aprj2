@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.ToString;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.pubsub.api.PubSub;
 import pl.so5dz.aprj2.pubsub.api.Topic;
 import pl.so5dz.aprj2.pubsub.impl.Topics;

@@ -1,6 +1,6 @@
 package pl.so5dz.aprj2.core.device;
 
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 
 /**
  * Represents a named device that can be opened, closed, and written to (can

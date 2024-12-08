@@ -4,7 +4,7 @@ import java.io.OutputStream;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
 import pl.so5dz.aprj2.aprs.representation.impl.Ax25Representation;
 import pl.so5dz.aprj2.protocol.PacketOutputStream;
 

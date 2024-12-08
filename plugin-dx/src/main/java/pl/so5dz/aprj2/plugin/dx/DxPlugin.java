@@ -9,10 +9,10 @@ import java.util.Set;
 import com.google.auto.service.AutoService;
 
 import lombok.extern.slf4j.Slf4j;
+import pl.so5dz.aprj2.aprs.callsign.Callsign;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
-import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.DefaultPacket;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.packet.Packet;
+import pl.so5dz.aprj2.aprs.packet.impl.DefaultPacket;
 import pl.so5dz.aprj2.aprs.parser.models.PacketContent;
 import pl.so5dz.aprj2.aprs.parser.models.Position;
 import pl.so5dz.aprj2.aprs.parser.old.PacketContentParser;
