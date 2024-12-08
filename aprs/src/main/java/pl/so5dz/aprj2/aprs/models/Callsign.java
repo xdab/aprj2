@@ -2,22 +2,10 @@ package pl.so5dz.aprj2.aprs.models;
 
 import java.util.Objects;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
-/**
- * Callsign of an APRS station.
- * <p>
- * This class represents an APRS callsign, which consists of a base callsign,
- * an optional SSID and an optional flag indicating if the callsign acted
- * as a repeater.
- * </p>
- */
-@Data
-@Builder
-public class Callsign {
+public abstract class Callsign {
+
     /**
      * Base callsign.
      * <p>
@@ -25,8 +13,7 @@ public class Callsign {
      * assigned by the regulatory authority.
      * </p>
      */
-    @NonNull
-    private String base;
+    public abstract String getBase();
 
     /**
      * SSID (Sub-Station IDentifier).
@@ -35,7 +22,7 @@ public class Callsign {
      * between multiple stations using the same base callsign.
      * </p>
      */
-    private int ssid;
+    public abstract int getSsid();
 
     /**
      * Flag indicating if the callsign acted as a repeater.
@@ -43,7 +30,7 @@ public class Callsign {
      * This flag is used in the context of APRS digipeating.
      * </p>
      */
-    private boolean repeated;
+    public abstract boolean isRepeated();
 
     /**
      * Creates a new Callsign object from a string representation in TNC2 format.
@@ -51,8 +38,8 @@ public class Callsign {
      * @param tnc2Representation the TNC2 representation of the callsign
      * @return the Callsign object
      */
-    public static Callsign fromString(String tnc2Representation) {
-        return Tnc2Representation.getInstance().toCallsign(tnc2Representation);
+    public static DefaultCallsign fromString(String tnc2Representation) {
+        return new DefaultCallsign(Tnc2Representation.getInstance().toCallsign(tnc2Representation));
     }
 
     /**
@@ -84,7 +71,7 @@ public class Callsign {
         }
         if (obj instanceof Callsign) {
             Callsign other = (Callsign) obj;
-            return base.equalsIgnoreCase(other.base) && ssid == other.ssid;
+            return getBase().equalsIgnoreCase(other.getBase()) && getSsid() == other.getSsid();
         }
         return false;
     }
@@ -99,7 +86,7 @@ public class Callsign {
      * @return the simple hash code
      */
     public int simpleHashCode() {
-        return Objects.hash(base, ssid);
+        return Objects.hash(getBase(), getSsid());
     }
 
     /**
@@ -113,6 +100,7 @@ public class Callsign {
      * <p>
      */
     public boolean isLegalCallsign() {
-        return base.matches("[A-Z]+[0-9]+[A-Z]+");
+        return getBase().matches("[A-Z]+[0-9]+[A-Z]+");
     }
+
 }

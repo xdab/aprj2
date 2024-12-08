@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
@@ -18,9 +20,9 @@ public class Tnc2RepresentationTest {
 
     @Test
     public void testToRepresentation1() {
-        Packet packet = Packet.builder()
-                .source(Callsign.builder().base("ABC").ssid(1).build())
-                .destination(Callsign.builder().base("DEF").build())
+        Packet packet = DefaultPacket.builder()
+                .source(DefaultCallsign.builder().base("ABC").ssid(1).build())
+                .destination(DefaultCallsign.builder().base("DEF").build())
                 .info("INFO1")
                 .build();
         String repr = instance.toRepresentation(packet);
@@ -29,12 +31,12 @@ public class Tnc2RepresentationTest {
 
     @Test
     public void testToRepresentation2() {
-        Packet packet = Packet.builder()
-                .source(Callsign.builder().base("ABC").build())
-                .destination(Callsign.builder().base("DEF").ssid(15).build())
+        Packet packet = DefaultPacket.builder()
+                .source(DefaultCallsign.builder().base("ABC").build())
+                .destination(DefaultCallsign.builder().base("DEF").ssid(15).build())
                 .path(List.of(
-                        Callsign.builder().base("GHI").ssid(8).repeated(true).build(),
-                        Callsign.builder().base("JKL").repeated(true).build()))
+                    DefaultCallsign.builder().base("GHI").ssid(8).repeated(true).build(),
+                    DefaultCallsign.builder().base("JKL").repeated(true).build()))
                 .info("INFO 2")
                 .build();
         String repr = instance.toRepresentation(packet);
@@ -128,21 +130,21 @@ public class Tnc2RepresentationTest {
 
     @Test
     public void testToRepresentationCallsign1() {
-        Callsign callsign = Callsign.builder().base("ABC").ssid(1).build();
+        Callsign callsign = DefaultCallsign.builder().base("ABC").ssid(1).build();
         String repr = instance.toRepresentation(callsign);
         assertEquals("ABC-1", repr);
     }
 
     @Test
     public void testToRepresentationCallsign2() {
-        Callsign callsign = Callsign.builder().base("DEF").ssid(15).repeated(true).build();
+        Callsign callsign = DefaultCallsign.builder().base("DEF").ssid(15).repeated(true).build();
         String repr = instance.toRepresentation(callsign);
         assertEquals("DEF-15*", repr);
     }
 
     @Test
     public void testToRepresentationCallsign3() {
-        Callsign callsign = Callsign.builder().base("GHI").build();
+        Callsign callsign = DefaultCallsign.builder().base("GHI").build();
         String repr = instance.toRepresentation(callsign);
         assertEquals("GHI", repr);
     }

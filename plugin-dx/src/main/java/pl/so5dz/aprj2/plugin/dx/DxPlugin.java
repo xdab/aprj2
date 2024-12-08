@@ -11,6 +11,7 @@ import com.google.auto.service.AutoService;
 import lombok.extern.slf4j.Slf4j;
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.parser.models.PacketContent;
 import pl.so5dz.aprj2.aprs.parser.models.Position;
@@ -127,7 +128,7 @@ public class DxPlugin extends PacketRxInterceptorPlugin {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd-MM-yyyy");
         String timeString = sdf.format(now);
-        return Packet.builder()
+        return DefaultPacket.builder()
                 .source(ownCallsign)
                 .destination(Callsigns.APRJ2)
                 .info(String.format(">DX %s %.1fkm @ %s", stationCallsignString, distance, timeString))

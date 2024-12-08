@@ -6,13 +6,15 @@ import java.util.List;
 import pl.so5dz.aprj2.aprs.antlr.PacketBaseListener;
 import pl.so5dz.aprj2.aprs.antlr.PacketParser;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 
 public class PacketFactory extends PacketBaseListener {
-    private Packet.PacketBuilder packetBuilder;
+    private DefaultPacket.DefaultPacketBuilder packetBuilder;
     private Packet packet;
 
-    private Callsign.CallsignBuilder callsignBuilder;
+    private DefaultCallsign.DefaultCallsignBuilder callsignBuilder;
     private Callsign callsign;
 
     private List<Callsign> path;
@@ -24,13 +26,13 @@ public class PacketFactory extends PacketBaseListener {
     @Override
     public void enterPacket(PacketParser.PacketContext ctx) {
         packet = null;
-        packetBuilder = Packet.builder();
+        packetBuilder = DefaultPacket.builder();
     }
 
     @Override
     public void enterCallsign(PacketParser.CallsignContext ctx) {
         callsign = null;
-        callsignBuilder = Callsign.builder();
+        callsignBuilder = DefaultCallsign.builder();
     }
 
     @Override

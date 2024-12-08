@@ -7,6 +7,8 @@ import java.util.List;
 
 import lombok.NonNull;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.representation.PacketRepresentation;
 
@@ -29,24 +31,23 @@ public class Ax25Representation implements PacketRepresentation<byte[]> {
     }
 
     @Override
-    @NonNull
     public Packet toPacket(@NonNull byte[] repr) {
         if (repr.length < 16) {
             throw new IllegalArgumentException("AX.25 packet representation is too short");
         }
 
-        var destBuilder = Callsign.builder();
+        var destBuilder = DefaultCallsign.builder();
         readCallsign(destBuilder, repr, 0);
         Callsign destination = destBuilder.build();
 
-        var sourceBuilder = Callsign.builder();
+        var sourceBuilder = DefaultCallsign.builder();
         boolean last = readCallsign(sourceBuilder, repr, 7);
         Callsign source = sourceBuilder.build();
 
         List<Callsign> path = new ArrayList<>();
         int i = 14;
         while (!last && i < repr.length - 7) {
-            var callsignBuilder = Callsign.builder();
+            var callsignBuilder = DefaultCallsign.builder();
             last = readCallsign(callsignBuilder, repr, i);
             path.add(callsignBuilder.build());
             i += 7;
@@ -62,7 +63,7 @@ public class Ax25Representation implements PacketRepresentation<byte[]> {
             info = new String(infoBytes);
         }
 
-        return Packet.builder()
+        return DefaultPacket.builder()
                 .source(source)
                 .destination(destination)
                 .path(path)
@@ -112,7 +113,7 @@ public class Ax25Representation implements PacketRepresentation<byte[]> {
     }
 
     private static boolean readCallsign(
-            Callsign.CallsignBuilder callsignBuilder, byte[] repr, int startIndex) {
+            DefaultCallsign.DefaultCallsignBuilder callsignBuilder, byte[] repr, int startIndex) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 6; i++) {
             int charByte = repr[startIndex + i] & 0xff;

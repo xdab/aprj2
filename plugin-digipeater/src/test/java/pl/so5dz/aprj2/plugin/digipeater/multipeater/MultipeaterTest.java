@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.plugin.digipeater.Digipeater;
 import pl.so5dz.aprj2.plugin.digipeater.TestConstants;
 
@@ -45,7 +45,7 @@ public class MultipeaterTest {
 
     @Test
     public void testHandle_nullSourceDeviceName_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .build();
@@ -55,7 +55,7 @@ public class MultipeaterTest {
 
     @Test
     public void testHandle_noMatchingDigipeaters_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .build();
@@ -65,7 +65,7 @@ public class MultipeaterTest {
 
     @Test
     public void testHandle_singleMatchingDigipeater_callsItsHandle() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .build();
@@ -81,7 +81,7 @@ public class MultipeaterTest {
 
     @Test
     public void testHandle_multipleMatchingDigipeaters_callsTheirHandles() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .build();

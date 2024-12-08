@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 
 @Getter
@@ -94,7 +96,7 @@ public class Digipeater {
             newPath.add(aliasIndex, repeatedOwnCallsign());
         }
 
-        return Packet.builder()
+        return DefaultPacket.builder()
                 .source(packet.getSource())
                 .destination(packet.getDestination())
                 .path(newPath)
@@ -108,7 +110,7 @@ public class Digipeater {
         if (ownCallsign.isRepeated()) {
             return ownCallsign;
         }
-        return ownCallsign = Callsign.builder()
+        return ownCallsign = DefaultCallsign.builder()
                 .base(ownCallsign.getBase())
                 .ssid(ownCallsign.getSsid())
                 .repeated(true)
@@ -117,7 +119,7 @@ public class Digipeater {
 
     private Callsign decrement(Callsign callsign) {
         int decrementedSsid = Math.max(0, callsign.getSsid() - 1);
-        return Callsign.builder()
+        return DefaultCallsign.builder()
                 .base(callsign.getBase())
                 .ssid(decrementedSsid)
                 .repeated(decrementedSsid == 0) // Mark as repeated when all desired hops were performed

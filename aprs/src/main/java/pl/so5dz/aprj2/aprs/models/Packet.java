@@ -1,26 +1,16 @@
 package pl.so5dz.aprj2.aprs.models;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import pl.so5dz.aprj2.aprs.constants.Callsigns;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
-/**
- * Represents a single AX.25 packet.
- */
-@Data
-@Builder
-public class Packet {
+public abstract class Packet {
+
     /**
      * The callsign of the station that originated the packet.
      */
-    @NonNull
-    private Callsign source;
+    public abstract Callsign getSource();
 
     /**
      * The callsign of the station that is the intended recipient of the packet.
@@ -28,17 +18,13 @@ public class Packet {
      * For APRS, this has a default value of "APRJ2".
      * </p>
      */
-    @NonNull
-    @Builder.Default
-    private Callsign destination = Callsigns.APRJ2;
+    public abstract Callsign getDestination();
 
     /**
      * The path of the packet, which is a list of callsigns of stations
      * that have repeated or are supposed to repeat the packet.
      */
-    @NonNull
-    @Builder.Default
-    private List<Callsign> path = new ArrayList<>();
+    public abstract List<Callsign> getPath();
 
     /**
      * The control field of the packet.
@@ -46,8 +32,7 @@ public class Packet {
      * For APRS, this has a fixed value of 0x03.
      * </p>
      */
-    @Builder.Default
-    private int control = 0x03;
+    public abstract int getControl();
 
     /**
      * The protocol ID of the packet.
@@ -55,13 +40,12 @@ public class Packet {
      * For APRS, this has a fixed value of 0xf0.
      * </p>
      */
-    @Builder.Default
-    private int protocol = 0xf0;
+    public abstract int getProtocol();
 
     /**
      * The information field of the packet, which contains the actual data.
      */
-    private String info;
+    public abstract String getInfo();
 
     /**
      * Returns the string representation of the packet in TNC2 format.
@@ -85,6 +69,6 @@ public class Packet {
      * @return the simple hash code of the packet
      */
     public int simpleHashCode() {
-        return Objects.hash(source.simpleHashCode(), destination.simpleHashCode(), info);
+        return Objects.hash(getSource(), getDestination(), getInfo());
     }
 }

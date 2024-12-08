@@ -12,6 +12,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.representation.impl.Ax25Representation;
 
@@ -20,9 +22,9 @@ public class Ax25RepresentationTest {
 
     @Test
     public void testToRepresentation1() {
-        Packet packet = Packet.builder()
-                .source(Callsign.builder().base("ABC").ssid(1).build())
-                .destination(Callsign.builder().base("DEF").build())
+        Packet packet = DefaultPacket.builder()
+                .source(DefaultCallsign.builder().base("ABC").ssid(1).build())
+                .destination(DefaultCallsign.builder().base("DEF").build())
                 .path(List.of())
                 .info("INFO1")
                 .control(0)

@@ -5,6 +5,8 @@ import java.util.List;
 
 import lombok.NonNull;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.aprs.representation.CallsignRepresentation;
 import pl.so5dz.aprj2.aprs.representation.PacketRepresentation;
@@ -60,7 +62,7 @@ public class Tnc2Representation implements PacketRepresentation<String>, Callsig
             path.add(toCallsign(pathSplit[i]));
         }
 
-        return Packet.builder()
+        return DefaultPacket.builder()
                 .source(source)
                 .destination(destination)
                 .path(path)
@@ -108,7 +110,7 @@ public class Tnc2Representation implements PacketRepresentation<String>, Callsig
                 throw new IllegalArgumentException("Invalid SSID in TNC2 callsign representation: " + repr);
             }
         }
-        return Callsign.builder()
+        return DefaultCallsign.builder()
                 .base(base)
                 .ssid(ssid)
                 .repeated(repeated)

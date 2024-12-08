@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 import pl.so5dz.aprj2.core.TestConstants;
 
@@ -30,7 +31,7 @@ public class DeduplicatorTest {
 
     @Test
     public void deduplicate_inputNotNull_forTheFirstTime_returnsInput() {
-        Packet packet = Packet.builder()
+        Packet packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.sampleStation)
                 .info("Test")
@@ -41,7 +42,7 @@ public class DeduplicatorTest {
 
     @Test
     public void deduplicate_inputNotNull_forTheSecondTime_returnsNull() {
-        Packet packet = Packet.builder()
+        Packet packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.sampleStation)
                 .info("Test")
@@ -53,7 +54,7 @@ public class DeduplicatorTest {
 
     @Test
     public void deduplicate_inputNotNull_afterDeduplicationWindow_returnsInput() {
-        Packet packet = Packet.builder()
+        Packet packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.sampleStation)
                 .info("Test")

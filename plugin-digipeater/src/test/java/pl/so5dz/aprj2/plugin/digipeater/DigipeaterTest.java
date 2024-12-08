@@ -15,7 +15,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import pl.so5dz.aprj2.aprs.models.Callsign;
-import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 
 public class DigipeaterTest {
     private static Digipeater digipeater;
@@ -37,7 +38,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_emptyPath_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .build();
@@ -51,7 +52,7 @@ public class DigipeaterTest {
         for (int i = 0; i < 8; i++) {
             path.add(TestConstants.sampleRepeater);
         }
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .path(path)
@@ -62,7 +63,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_ownPacket_returnsNull() {
-        var ownPacket = Packet.builder()
+        var ownPacket = DefaultPacket.builder()
                 .source(TestConstants.n0call)
                 .destination(TestConstants.aprs)
                 .path(List.of(TestConstants.sampleRepeater))
@@ -73,7 +74,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_packetAddressedToSelf_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.n0call)
                 .path(List.of(TestConstants.sampleRepeater))
@@ -84,10 +85,10 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_packetRepeatedByThisDigipeater_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
-                .path(List.of(Callsign.builder()
+                .path(List.of(DefaultCallsign.builder()
                         .base("N0CALL")
                         .repeated(true)
                         .build()))
@@ -98,7 +99,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_noRepeatableAlias_returnsNull() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .path(List.of(TestConstants.sampleRepeater, TestConstants.wide1Exhausted, TestConstants.sp1Exhausted))
@@ -109,7 +110,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_validTracedAlias_works() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .path(List.of(TestConstants.sampleRepeater, TestConstants.wide1Available, TestConstants.sampleRepeater))
@@ -154,7 +155,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_validUntracedAlias_works() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .path(List.of(TestConstants.sp1Available))
@@ -194,7 +195,7 @@ public class DigipeaterTest {
 
     @Test
     public void testHandle_validExplicitPath_works() {
-        var packet = Packet.builder()
+        var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
                 .path(List.of(TestConstants.n0call, TestConstants.sampleRepeater))

@@ -10,18 +10,20 @@ import org.junit.jupiter.api.Test;
 
 import pl.so5dz.aprj2.aprs.constants.Callsigns;
 import pl.so5dz.aprj2.aprs.models.Callsign;
+import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
+import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
 
 public class GatedPacketFactoryTest {
-    private static final Callsign sampleIGateCallsign = Callsign.builder().base("MYIGATE").build();
+    private static final Callsign sampleIGateCallsign = DefaultCallsign.builder().base("MYIGATE").build();
     private static final Packet samplePacket;
     static {
-        Callsign source = Callsign.builder().base("AB1CD").ssid(1).build();
-        Callsign destination = Callsign.builder().base("APRS").build();
-        Callsign path1 = Callsign.builder().base("WIDE1").ssid(1).build();
-        Callsign path2 = Callsign.builder().base("WIDE2").ssid(1).build();
+        Callsign source = DefaultCallsign.builder().base("AB1CD").ssid(1).build();
+        Callsign destination = DefaultCallsign.builder().base("APRS").build();
+        Callsign path1 = DefaultCallsign.builder().base("WIDE1").ssid(1).build();
+        Callsign path2 = DefaultCallsign.builder().base("WIDE2").ssid(1).build();
         List<Callsign> path = List.of(path1, path2);
-        samplePacket = Packet.builder()
+        samplePacket = DefaultPacket.builder()
                 .source(source)
                 .destination(destination)
                 .path(path)
