@@ -2,8 +2,10 @@ package pl.so5dz.aprj2.aprs.models;
 
 import java.util.Objects;
 
+import lombok.NoArgsConstructor;
 import pl.so5dz.aprj2.aprs.representation.impl.Tnc2Representation;
 
+@NoArgsConstructor
 public abstract class Callsign {
 
     /**
@@ -31,6 +33,10 @@ public abstract class Callsign {
      * </p>
      */
     public abstract boolean isRepeated();
+
+    protected Callsign(Callsign other) {
+        // Copy constructor
+    }
 
     /**
      * Creates a new Callsign object from a string representation in TNC2 format.

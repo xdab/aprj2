@@ -25,8 +25,8 @@ public class DigipeaterTest {
     public static void setUp() {
         digipeater = Digipeater.builder()
                 .ownCallsign(TestConstants.n0call)
-                .tracedAliases(Set.of("WIDE1", "WIDE2"))
-                .untracedAliases(Set.of("SP1", "SP2"))
+                .tracedAliases(Set.of("WIDE"))
+                .untracedAliases(Set.of("SP"))
                 .build();
     }
 
@@ -131,24 +131,20 @@ public class DigipeaterTest {
         var path = returnedPacket.getPath();
         assertNotNull(path);
 
-        // Assert the updated alias is present in the path
-        int aliasIndex = path.indexOf(TestConstants.wide1Exhausted);
-        assertNotEquals(-1, aliasIndex);
-        var alias = path.get(aliasIndex);
-        assertTrue(alias.isRepeated());
-
         // Assert own callsign was added before the traced alias
-        int ownCallsignIndex = path.indexOf(TestConstants.n0callRepeated);
-        assertNotEquals(-1, ownCallsignIndex);
-        assertTrue(ownCallsignIndex == aliasIndex - 1);
+        assertTrue(path.get(1).simpleEquals(TestConstants.n0callRepeated));
+
+        // Assert the updated alias is present in the path
+        assertTrue(path.get(2).simpleEquals(TestConstants.wide1Exhausted));
+        assertTrue(path.get(2).isRepeated());
 
         // Assert callsigns before ownCallsign were not modified
-        for (int i = 0; i < ownCallsignIndex; i++) {
+        for (int i = 0; i < 1; i++) {
             assertEquals(TestConstants.sampleRepeater, path.get(i));
         }
 
         // Assert callsigns after the alias were not modified
-        for (int i = aliasIndex + 1; i < path.size(); i++) {
+        for (int i = 3; i < path.size(); i++) {
             assertEquals(TestConstants.sampleRepeater, path.get(i));
         }
     }
@@ -158,7 +154,7 @@ public class DigipeaterTest {
         var packet = DefaultPacket.builder()
                 .source(TestConstants.sampleStation)
                 .destination(TestConstants.aprs)
-                .path(List.of(TestConstants.sp1Available))
+                .path(List.of(TestConstants.wide1Exhausted, TestConstants.sp1Available, TestConstants.wide1Exhausted))
                 .control(1)
                 .protocol(2)
                 .info("Test")
@@ -177,19 +173,17 @@ public class DigipeaterTest {
         assertNotNull(path);
 
         // Assert the updated alias is present in the path
-        int aliasIndex = path.indexOf(TestConstants.sp1Exhausted);
-        assertNotEquals(-1, aliasIndex);
-        var alias = path.get(aliasIndex);
-        assertTrue(alias.isRepeated());
+        assertTrue(path.get(1).simpleEquals(TestConstants.sp1Exhausted));
+        assertTrue(path.get(1).isRepeated());
 
         // Assert callsigns before alias were not modified
-        for (int i = 0; i < aliasIndex; i++) {
-            assertEquals(TestConstants.sampleRepeater, path.get(i));
+        for (int i = 0; i < 1; i++) {
+            assertEquals(TestConstants.wide1Exhausted, path.get(i));
         }
 
         // Assert callsigns after the alias were not modified
-        for (int i = aliasIndex + 1; i < path.size(); i++) {
-            assertEquals(TestConstants.sampleRepeater, path.get(i));
+        for (int i = 2; i < path.size(); i++) {
+            assertEquals(TestConstants.wide1Exhausted, path.get(i));
         }
     }
 

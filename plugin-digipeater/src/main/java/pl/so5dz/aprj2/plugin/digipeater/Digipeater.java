@@ -13,6 +13,7 @@ import pl.so5dz.aprj2.aprs.models.Callsign;
 import pl.so5dz.aprj2.aprs.models.DefaultCallsign;
 import pl.so5dz.aprj2.aprs.models.DefaultPacket;
 import pl.so5dz.aprj2.aprs.models.Packet;
+import pl.so5dz.aprj2.aprs.models.RepeatingScheme;
 
 @Getter
 @Builder
@@ -39,10 +40,18 @@ public class Digipeater {
      */
     private final Set<String> untracedAliases;
 
+    /**
+     * Helper object: set of all aliases handled by this digipeater.
+     */
+    private final Set<String> allHandledAliases = new HashSet<>();
+
     public Digipeater(Callsign ownCallsign, Collection<String> tracedAliases, Collection<String> untracedAliases) {
         this.ownCallsign = ownCallsign;
         this.tracedAliases = new HashSet<>(tracedAliases);
         this.untracedAliases = new HashSet<>(untracedAliases);
+        // allHandledAliases = tracedAliases UNION untracedAliases
+        this.allHandledAliases.addAll(tracedAliases);
+        this.allHandledAliases.addAll(untracedAliases);
     }
 
     /**
@@ -76,24 +85,29 @@ public class Digipeater {
             return null;
         }
 
-        // Find first alias which is grounds for repeating the packet
-        Callsign alias = packet.getPath()
+        // Find first applicable repeating instruction
+        Callsign repeatingInstruction = packet.getPath()
                 .stream()
-                .filter(this::isRepeatable)
+                .filter(this::isApplicableRepeatingInstruction)
                 .findFirst()
                 .orElse(null);
-        if (alias == null) {
+        if (repeatingInstruction == null) {
             return null;
         }
 
-        // Update the alias to mark packet repetition
-        Callsign updatedAlias = isOwnCallsign(alias) ? repeatedOwnCallsign() : decrement(alias);
+        // Prepare new path marking the performed digipeating
         List<Callsign> newPath = new ArrayList<>(packet.getPath());
-        int aliasIndex = newPath.indexOf(alias);
-        newPath.set(aliasIndex, updatedAlias);
-        if (isTracedAlias(alias)) {
-            // Add own callsign before the traced alias
-            newPath.add(aliasIndex, repeatedOwnCallsign());
+        if (isOwnCallsign(repeatingInstruction)) {
+            Callsign updatedInstruction = repeatedOwnCallsign();
+            int aliasIndex = newPath.indexOf(repeatingInstruction);
+            newPath.set(aliasIndex, updatedInstruction);
+        } else {
+            RepeatingScheme scheme = new RepeatingScheme(repeatingInstruction);
+            int aliasIndex = newPath.indexOf(repeatingInstruction);
+            newPath.set(aliasIndex, scheme.decrement());
+            if (isTracedAlias(scheme.getAlias())) {
+                newPath.add(aliasIndex, repeatedOwnCallsign());
+            }
         }
 
         return DefaultPacket.builder()
@@ -117,32 +131,36 @@ public class Digipeater {
                 .build();
     }
 
-    private Callsign decrement(Callsign callsign) {
-        int decrementedSsid = Math.max(0, callsign.getSsid() - 1);
-        return DefaultCallsign.builder()
-                .base(callsign.getBase())
-                .ssid(decrementedSsid)
-                .repeated(decrementedSsid == 0) // Mark as repeated when all desired hops were performed
-                .build();
-    }
-
-    private boolean isRepeatable(Callsign alias) {
-        boolean hasNotBeenRepeated = !alias.isRepeated();
-        boolean isOwnCallsign = isOwnCallsign(alias);
-        boolean hasRemainingHops = alias.getSsid() > 0;
-        boolean isValidAlias = hasRemainingHops && (isTracedAlias(alias) || isUntracedAlias(alias));
-        return hasNotBeenRepeated && (isValidAlias || isOwnCallsign);
+    private boolean isApplicableRepeatingInstruction(Callsign callsign) {
+        if (callsign.isRepeated()) {
+            return false;
+        }
+        if (isOwnCallsign(callsign)) {
+            return true;
+        }
+        // Try parsing a repeating scheme out of the callsign
+        RepeatingScheme scheme;
+        try {
+            scheme = new RepeatingScheme(callsign);
+        } catch (AssertionError e) {
+            // If not a repeating scheme, ignore the callsign
+            return false;
+        }
+        if (scheme.isExhausted()) {
+            return false;
+        }
+        return isHandledAlias(scheme.getAlias());
     }
 
     private boolean isOwnCallsign(Callsign callsign) {
         return ownCallsign.simpleEquals(callsign);
     }
 
-    private boolean isTracedAlias(Callsign callsign) {
-        return (tracedAliases != null) && tracedAliases.contains(callsign.getBase());
+    private boolean isTracedAlias(String alias) {
+        return (tracedAliases != null) && tracedAliases.contains(alias);
     }
 
-    private boolean isUntracedAlias(Callsign callsign) {
-        return (untracedAliases != null) && untracedAliases.contains(callsign.getBase());
+    private boolean isHandledAlias(String alias) {
+        return (allHandledAliases != null) && allHandledAliases.contains(alias);
     }
 }
